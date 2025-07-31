@@ -42,46 +42,6 @@
 </head>
 <body>
 
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav> -->
-
 
 <body>
   <div class="header-wrapper">
@@ -154,7 +114,7 @@
     <div class="hero-body">
       <img src="static/images/teaser_c.jpg" class="center">
       <h2 class="subtitle has-text-centered" style="margin-top: 15px; margin-bottom: -10px">
-        <b>iLRM enables an iterative refinement of Gaussian splatting from multi-view images.</b> <br>
+        <b>iLRM Overview.</b> <br>
       </h2>
     </div>
   </div>
@@ -164,7 +124,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Explanation Video</h2>
+        <!-- <h2 class="title is-3">Explanation Video</h2> -->
         <div class="publication-video">
           <iframe src="https://www.youtube.com/embed/-qSpDZPNIKU"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -291,7 +251,25 @@
           </p>
         </div>
         <div class="content has-text-centered">
-          <video id="replay-video"
+          <div class="video-slider-container">
+            <div class="video-slider-wrapper">
+              <video id="video-left" autoplay muted loop playsinline>
+                <source src="static/video/ours_slider_c.mp4" type="video/mp4">
+              </video>
+              <video id="video-right" autoplay muted loop playsinline>
+                <source src="static/video/ds_slider_c.mp4" type="video/mp4">
+              </video>
+              <div id="slider-bar"></div>
+              <div id="slider-handle"></div>    
+              <div class="video-label video-label-left">iLRM (Ours)</div>
+              <div class="video-label video-label-right">DepthSplat</div>    
+              <!-- 🟡 Play/Pause Button -->
+              <button id="toggle-play" class="video-toggle-button">
+              <img id="toggle-icon" src="static/images/pause.png" alt="Pause" />
+              </button>
+            </div>    
+          </div>          
+          <!-- <video id="replay-video"
                  controls
                  muted
                  preload
@@ -299,8 +277,8 @@
                  width="90%">
             <source src="./static/select_first/hr_cc.mp4"
                     type="video/mp4">
-          </video>
-          <img src="static/images/hr_table.jpg" class="center" style="width: 80%">          
+          </video> -->
+          <img src="static/images/hr_table.jpg" class="center" style="width: 100%">          
         </div>
 
         <h3 class="title is-4">24 input images with 256x448 resolution (All frames)</h3>
@@ -318,11 +296,11 @@
                  muted
                  preload
                  playsinline
-                 width="70%">
+                 width="80%">
             <source src="./static/select_first/lr_cc.mp4"
                     type="video/mp4">
           </video>
-          <img src="static/images/lr_table.jpg" class="center" style="width: 70%">          
+          <img src="static/images/lr_table.jpg" class="center" style="width: 80%">          
         </div>
         <h3 class="title is-4">Various number of input images on the RE10K dataset</h3>
         <div class="content has-text-justified">
@@ -345,6 +323,54 @@
     </div>
   </div>
 </section>
+
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const sliderBar = document.getElementById('slider-bar');
+    const videoRight = document.getElementById('video-right');
+    const videoLeft = document.getElementById('video-left');
+    const wrapper = document.querySelector('.video-slider-wrapper');
+    const sliderHandle = document.getElementById('slider-handle');
+    
+    wrapper.addEventListener('mousemove', (e) => {
+      const bounds = wrapper.getBoundingClientRect();
+      const offsetX = e.clientX - bounds.left;
+      const percent = offsetX / bounds.width;
+      const clipPercent = Math.min(100, Math.max(0, percent * 100));
+      videoRight.style.clipPath = `inset(0 0 0 ${clipPercent}%)`;
+      sliderBar.style.left = `${clipPercent}%`;
+      sliderHandle.style.left = `${clipPercent}%`;
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+      videoRight.style.clipPath = `inset(0 0 0 50%)`;
+      sliderBar.style.left = `50%`;
+      sliderHandle.style.left = `50%`;
+    });
+
+    // ▶️ Pause/Play toggle
+    const toggleBtn = document.getElementById("toggle-play");
+    const icon = document.getElementById("toggle-icon");
+    let isPlaying = true;
+
+    toggleBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        videoLeft.pause();
+        videoRight.pause();
+        icon.src = "static/images/play.png";
+        icon.alt = "Play";
+      } else {
+        videoLeft.play();
+        videoRight.play();
+        icon.src = "static/images/pause.png";
+        icon.alt = "Pause";
+      }
+      isPlaying = !isPlaying;
+    });
+  });
+</script>
+
 
 
 <section class="section" id="BibTeX">

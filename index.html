@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="iLRM: An Iterative Large 3D Reconstruction Model.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>iLRM</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<body>
+  <div class="header-wrapper">
+    <div class="header-container" id="header-container">
+      <div class="header-content">
+        <h1 style="font-family: 'CookieRun', serif; font-size: 5rem; font-weight: bold; margin-bottom: 0.1rem;">
+          <!-- <span style="color: rgb(217, 160, 116);">i</span><span style="color: rgb(250, 213, 103);">L</span><span style="color: rgb(167, 200, 135);">R</span><span style="color: rgb(136, 160, 212);">M</span> -->
+           <span style="color: rgb(230, 100, 80);">i</span><span style="color: rgb(230, 183, 53);">L</span><span style="color: rgb(117, 160, 85);">R</span><span style="color: rgb(96, 120, 172);">M</span>
+        </h1>
+        <h1 class="title is-1 publication-title" style="font-weight: bold; margin-bottom: 0.5rem; color: rgb(35, 33, 30);">An Iterative Large 3D Reconstruction Model</h1>        
+        <!-- <div class="responsive-header" style="font-family: 'Google Sans', sans-serif; font-weight: bold; font-size: 3rem; margin-bottom: 1rem;">
+            <h2>An Iterative Large 3D Reconstruction Model</h2>
+        </div>         -->
+        <!-- <h1 class="title is-1 publication-title" style="font-family: 'CookieRun', serif; font-size: 5rem; margin-top: 1rem;">iLRM</h1> -->
+        <!-- <h1 class="title is-1 publication-title" style="font-weight: bold;">An Iterative Large 3D Reconstruction Model</h1> -->
+        <div class="is-size-5 publication-authors" style="margin-bottom: 1rem;">
+          <a href="https://gynjn.github.io/info/">Gyeongjin Kang</a><sup style="color: black;">1</sup><span style="color: black;">,</span>
+          <a href="https://github.com/stnamjef">Seungtae Nam</a><sup style="color: black;">2</sup><span style="color: black;">,</span>
+          <a href="https://scholar.google.com/citations?user=VLzxTrAAAAAJ&hl=ko&oi=ao">Xiangyu Sun</a><sup style="color: black;">1</sup><span style="color: black;">,</span>
+          <a href="https://www.samehkhamis.com">Sameh Khamis</a><sup style="color: black;">3</sup><span style="color: black;">,</span>
+          <a href="https://www.cs.toronto.edu/~asamir/">Abdelrahman Mohamed</a><sup style="color: black;">3</sup><span style="color: black;">,</span>
+          <a href="https://silverbottlep.github.io/index.html">Eunbyung Park</a><sup style="color: black;">2</sup>
+        </div>
+        <div class="is-size-5 publication-authors" style="margin-bottom: 1rem;">
+          <span class="author-block" style="color: black;"><sup>1</sup>Sungkyunkwan University,</span>
+          <span class="author-block" style="color: black;"><sup>2</sup>Yonsei University,</span>
+          <span class="author-block" style="color: black;"><sup>3</sup>Rembrand</span>
+        </div>
+        <div class="publication-links" style="margin-bottom: -1rem;">
+          <!-- PDF Link. -->
+          <span class="link-block">
+            <a href="https://arxiv.org/pdf/2411.17190"
+                class="external-link button is-normal is-dark">
+              <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://arxiv.org/abs/2411.17190"
+                class="external-link button is-normal is-dark">
+              <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+          <!-- Code Link. -->
+          <span class="link-block">
+            <a href="https://github.com/Gynjn/selfsplat"
+                class="external-link button is-normal is-dark">
+              <span class="icon">
+                  <i class="fab fa-github"></i>
+              </span>
+              <span>Code</span>
+              </a>
+          </span>
+        </div>                 
+      </div> 
+      <div class="header-video">
+          <img draggable="false" src="static/images/teaser_cc.mp4">
+      </div>            
+    </div>  
+  </div>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop" style="margin-top: 2rem;">
+    <div class="hero-body">
+      <img src="static/images/teaser_c.jpg" class="center">
+      <h2 class="subtitle has-text-centered" style="margin-top: 15px">
+        <b>iLRM enables an iterative refinement of Gaussian splatting from multi-view images.</b> <br>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Explanation Video</h2>
+        <div class="publication-video">
+          <!-- <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+        </div>
+      </div>
+    </div>    
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Feed-forward 3D modeling has emerged as a promising approach for rapid and high-quality 3D reconstruction.
+            In particular, directly generating explicit 3D representations, such as 3D Gaussian splatting, 
+            has attracted significant attention due to its fast and high-quality rendering, as well as numerous applications.
+            However, many state-of-the-art methods, primarily based on transformer architectures, 
+            suffer from severe scalability issues because they rely on full attention across image tokens from multiple input views, 
+            resulting in prohibitive computational costs as the number of views or image resolution increases.
+          </p>
+          <p>
+            Toward a scalable and efficient feed-forward 3D reconstruction, 
+            we introduce an iterative Large 3D Reconstruction Model (<b><i>iLRM</i></b>) 
+            that generates 3D Gaussian representations through an iterative refinement mechanism, 
+            guided by three core principles: 
+            (1) decoupling the scene representation from input-view images to enable <b><i>compact 3D representations</i></b>; 
+            (2) decomposing fully-attentional multi-view interactions into a <b><i>two-stage attention</i></b> scheme to reduce computational costs; 
+            and (3) injecting <b><i>high-resolution information at every layer</i></b> to achieve high-fidelity reconstruction.
+            Experimental results on widely used datasets, such as RE10K and DL3DV, demonstrate that <b><i>iLRM</i></b> outperforms existing methods in both reconstruction quality and speed.            
+          </p>
+          <p>
+            Notably, <b><i>iLRM</i></b> exhibits superior scalability, 
+            delivering significantly higher reconstruction quality under comparable computational cost by efficiently leveraging a larger number of input views.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel" data-slides-to-show="2">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/select_first/0_cc.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/select_first/5_cc.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/select_first/3_cc.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/select_first/6_cc.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/select_first/9_cc.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/select_first/14_cc.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <!-- <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/select_first/10_cc.mp4"
+                    type="video/mp4">
+          </video>
+        </div> -->
+        <!-- <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div> -->
+      </div>
+      <div class="has-text-centered">
+        <p class="subtitle is-5">Results on the DL3DV dataset using 32 input images with a resolution of 512×960.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Core architectural design</h2>
+        <img src="static/images/eff_attn_c.jpg" class="center">
+
+        <div class="content has-text-justified">
+          <p>
+            Our method decouples scene representation from input-view images, 
+            enabling efficient computation and compact 3D reconstruction. 
+            The example above uses half-resolution views, 
+            significantly reducing the attention cost while maintaining high-quality reconstruction.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Comparison</h2>
+
+        <!-- Re-rendering. -->
+        <h3 class="title is-4">12 input images with 512x960 resolution (100 frames)</h3>
+        <div class="content has-text-justified">
+          <p>
+            We compare our method with the state-of-the-art methods on the DL3DV dataset.
+            Both methods utilize 12 input images with a resolution of 512x960. 
+            We also show the encoding time and memory consumption of each method.
+            <b>Note that, our method generates only 1/4 Gaussians compared to the baseline method.</b>
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="90%">
+            <source src="./static/select_first/hr_cc.mp4"
+                    type="video/mp4">
+          </video>
+          <img src="static/images/hr_table.jpg" class="center" style="width: 80%">          
+        </div>
+
+        <h3 class="title is-4">24 input images with 256x448 resolution (All frames)</h3>
+        <div class="content has-text-justified">
+          <p>
+            We compare our method with the state-of-the-art methods on the DL3DV dataset.
+            Both methods utilize 24 input images with a resolution of 256x448.
+            We also show the encoding time and memory consumption of each method.
+            <b>Note that, our method generates only 1/4 Gaussians compared to the baseline method.</b>
+          </p>
+        </div>
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="70%">
+            <source src="./static/select_first/lr_cc.mp4"
+                    type="video/mp4">
+          </video>
+          <img src="static/images/lr_table.jpg" class="center" style="width: 70%">          
+        </div>
+        <h3 class="title is-4">Various number of input images on the RE10K dataset</h3>
+        <div class="content has-text-justified">
+          <p>
+            We compare our method with the state-of-the-art methods on the RealEstate10K dataset with various numbers of input images.
+          </p>
+          <img src="static/images/re10k_page_c.jpg" class="center">   
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline>
+            <source src="./static/select_first/re10k_video_c.mp4"
+                    type="video/mp4">
+          </video>          
+        </div>        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+      <pre><code style="font-size: 1.25em;">@article{GenerativeDensification,
+    title={Generative Densification: Learning to Densify Gaussians for High-Fidelity Generalizable 3D Reconstruction}, 
+    author={Nam, Seungtae and Sun, Xiangyu and Kang, Gyeongjin and Lee, Younggeun and Oh, Seungjun and Park, Eunbyung},
+    journal={arXiv preprint arXiv:2412.06234},
+    year={2024}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/pdf/2411.17190">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/Gynjn" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> 
+            which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

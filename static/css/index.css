@@ -1,0 +1,265 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.header-wrapper {
+    /* background: linear-gradient(-235deg, #1E0844 10%, #23316E 45%, #FE8383 75%, #F2E6C9 100%); */
+   background: linear-gradient(-210deg, #a8edea 0%, #fed6e3 100%);
+
+
+}
+
+.header-container {
+  color: #d7d167;
+  text-align: left; 
+  padding: 20px; 
+  opacity: 1.0;
+  z-index: 1000;
+  position: relative;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(0, 0%, 0%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+@font-face {
+  font-family: "CookieRun";
+  src: url("font/CookieRun_Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+.header-content strong {
+    color: #ffe099;
+}
+
+.header-content {
+    color: #FEEFC3;
+    text-align: left;
+}
+
+.header-content h1 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+    color: #FBBC04;
+}
+
+.header-content h2 {
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+    color: #FBBC04;
+}
+
+.header-container p {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .header-content h2 {
+    font-size: 1.2em !important;
+    line-height: 1.4 !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+  }
+}
+
+
+
+@media (min-width: 600px) {
+  .header-container {
+    display: flex; /* Use flexbox for positioning on larger screens */
+    justify-content: space-between; /* Space between the content and image */
+    align-items: center; /* Align items vertically */
+    padding: 50px 50px; /* Increase padding for larger screens */
+  }
+
+  .header-content {
+    max-width: calc(45% - 20px); /* Adjust width to include margin */
+    text-align: left; /* Align text to the left for larger screens */
+    margin-right: 10px; /* Add margin to the right of the header content */
+  }
+
+  .header-content h1 {
+    font-size: 3.3em; /* Increase font size for larger screens */
+  }
+
+  .header-content h2 {
+    margin-top: -0.75em; /* Reduce space between headers */
+    font-size: 2em; /* Increase font size for larger screens */
+  }
+
+  .teaser-video {
+    width: 100%; /* Set width to 100% */
+    margin-bottom: 2em;
+  }
+
+  .header-image {
+    /* 80% */
+    max-width: 90%;
+    /* center */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .header-video {
+    max-width: calc(50% - 20px); /* Adjust width to include margin */
+  }
+
+  .header-video video {
+    max-width: 90%; /* Video should be responsive within the container */
+    height: auto; /* Maintain the aspect ratio */
+  }  
+
+}

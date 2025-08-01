@@ -308,6 +308,12 @@ body {
   right: 16px;
 }
 
+#shiba {
+  pointer-events: auto;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 @media (max-width: 768px) {
   .header-content h2 {
     font-size: 1.2em !important;

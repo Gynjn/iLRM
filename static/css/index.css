@@ -209,8 +209,8 @@ body {
 .video-slider-container {
   position: relative;
   width: 100%;
-  max-width: 768px;
-  height: 410px;
+  max-width: 930px;
+  height: 508px;
   margin: 2rem auto;
   overflow: hidden;
   background-color: black;

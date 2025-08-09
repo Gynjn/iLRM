@@ -1,0 +1,31 @@
+# @package _global_
+
+defaults:
+  - override /dataset: dl3dv
+  - override /model/encoder: scale
+  - override /loss: [mse]
+  - override /dataset/view_sampler: boundedv2
+
+wandb:
+  name: dl3dv
+  tags: [dl3dv, 270x480]
+
+data_loader:
+  train:
+    batch_size: 1
+
+trainer:
+  max_steps: 100_001
+
+dataset: 
+  roots: [/data/dl3dv]
+  min_views: 2
+  max_views: 6
+  baseline_scale_bounds: false
+  make_baseline_1: false
+  image_shape: [256, 448]
+  ori_image_shape: [270, 480]
+
+test:
+  eval_time_skip_steps: 5
+  compute_scores: true

@@ -1,0 +1,6 @@
+name: scale
+
+patch_size: 8
+dim: 768
+head_dim: 64
+num_layers: 24

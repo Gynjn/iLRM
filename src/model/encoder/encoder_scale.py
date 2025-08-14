@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Literal, Optional
 from einops import rearrange
-
+import torch
 from ...dataset.shims.patch_shim import apply_patch_shim
 from ...dataset.types import BatchedExample, DataShim
 from ..types import Gaussians
@@ -43,20 +43,21 @@ class EncoderScale(Encoder[EncoderScaleCfg]):
         gaussians = self.scaler.forward(
             context,
         )
-        xyz_world = rearrange(
-            gaussians["xyz_world"], 
-            "b v (h w) srf -> b v (h w) () () srf", 
-            h=h, w=w)
-        densities = rearrange(
-            (gaussians["opacity"]-2.0),
-            "b v (h w) srf -> b v (h w) () srf",
-            h=h,
-            w=w,
-        ).float()
+        with torch.autocast(device_type="cuda", enabled=False):
+            xyz_world = rearrange(
+                gaussians["xyz_world"], 
+                "b v (h w) srf -> b v (h w) () () srf", 
+                h=h, w=w)
+            densities = rearrange(
+                (gaussians["opacity"]-2.0),
+                "b v (h w) srf -> b v (h w) () srf",
+                h=h,
+                w=w,
+            )
 
-        scale = (gaussians["scale"] - 6.9).clamp(max=-1.2).float()
-        rotation = gaussians["rotation"].float()
-        feature = rearrange(gaussians["feature"].float(), "... (xyz d_sh) -> ... xyz d_sh", xyz=3)
+            scale = (gaussians["scale"] - 6.9).clamp(max=-1.2)
+            rotation = gaussians["rotation"]
+            feature = rearrange(gaussians["feature"], "... (xyz d_sh) -> ... xyz d_sh", xyz=3)
 
         return Gaussians(
             rearrange(

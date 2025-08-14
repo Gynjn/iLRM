@@ -161,9 +161,14 @@ class Scaler(nn.Module):
         xyz, feature, scale, rotation, opacity = torch.split(
             gaussians, [3, (1)**2 *3, 3, 4, 1], dim=-1
         )
-        depths = xyz.mean(dim=-1, keepdim=True).sigmoid() * 500.0
-
-        xyz_world = depths * ray_d + ray_o
+        xyz = xyz.float()
+        feature = feature.float()
+        scale = scale.float()
+        rotation = rotation.float()
+        opacity = opacity.float()
+        with torch.autocast(device_type="cuda", enabled=False):
+            depths = xyz.mean(dim=-1, keepdim=True).sigmoid() * 500.0
+            xyz_world = depths * ray_d + ray_o
         return {
             "xyz_world": xyz_world, # b v (h w) 3
             "feature": feature, # b v (h w) (4+1)^2 * 3

@@ -104,7 +104,7 @@
       </div> 
       <div class="header-video">
           <video id="shiba" autoplay muted loop playsinline height="100%" draggable="false">
-            <source src="./static/video/tiger_cc.mp4" type="video/mp4">
+            <source src="./static/video/tiger_720c.mp4" type="video/mp4">
           </video>      
           <!-- <video draggable="false" src="static/video/tiger_720_30.mp4"> -->
       </div>            
@@ -175,43 +175,37 @@
       <div id="results-carousel" class="carousel results-carousel" data-slides-to-show="2">
         <div class="item item-steve">
           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/flower_cc.mp4"
+            <source src="./static/video/flower_3c.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/table_cc.mp4"
+            <source src="./static/video/table_3c.mp4"
                     type="video/mp4">
           </video>
         </div>        
         <div class="item item-chair-tp">
           <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/wedding_cc.mp4"
+            <source src="./static/video/bin_3c.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-shiba">
           <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/stone_cc.mp4"
+            <source src="./static/video/buda_3c.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/building_cc.mp4"
+            <source src="./static/video/building_3c.mp4"
                     type="video/mp4">
           </video>
         </div>        
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/buda_cc.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
       </div>
       <div class="has-text-centered">
-        <p class="subtitle is-5">Results on the DL3DV dataset using 32 input images with a resolution of 512×960.</p>
+        <p class="subtitle is-5">Results on the DL3DV dataset using 32 input images with a resolution of 540×960.</p>
     </div>
   </div>
 </section>
@@ -241,6 +235,20 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3" style="margin-top: 0.5rem">Comparison</h2>
+
+
+        <h3 class="title is-4" style="margin-top: 1rem">Undistorted DL3DV high-resolution (540x960)</h3>
+        <div class="content has-text-justified">
+          <p>
+            We compare our method against the current state-of-the-art wide-coverage feed-forward 3D reconstruction model, LongLRM, 
+            as well as optimization-based methods, 3D-GS and Mip-Splatting. 
+            The quantitative results are shown in the table below, performed with a full-frame coverage following the LongLRM protocol. 
+            LongLRM (10) means finetuning 10 epochs initialized from the LongLRM’s generated Gaussians. 
+            Since we generate more compact 3D Gaussian representations, our finetuning converges much faster than LongLRM.
+            <b>We utilized FlashAttention-3 for the zero-shot inference.</b>
+          </p>         
+          <img src="static/images/dl3dv_undist.jpg" class="center">            
+        </div>
 
         <!-- Re-rendering. -->
         <h3 class="title is-4">DL3DV high-resolution (512x960)</h3>

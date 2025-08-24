@@ -109,7 +109,7 @@ class IterativeLRM(nn.Module):
             d_model = self.config.model.transformer.d
         )
         
-        # Image token decoder (decode image tokens into pixels)
+        # Gaussian token decoder (decode tokens into 3D Gaussians)
         self.viewpoint_token_decoder = nn.Sequential(
             nn.LayerNorm(self.config.model.transformer.d, bias=False),
             nn.Linear(

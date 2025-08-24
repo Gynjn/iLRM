@@ -11,6 +11,8 @@ Official repo for the paper "**iLRM: An Iterative Large 3D Reconstruction Model*
 
 ![Teaser Image](/assets//teaser.jpg)
 
+Check out the [wide branch](https://github.com/Gynjn/iLRM/tree/wide) for wide-coverage scene reconstruction on the DL3DV dataset!
+
 ## Installation
 
 ```bash

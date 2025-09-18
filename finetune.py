@@ -41,8 +41,8 @@ dataloader_iter = iter(dataloader)
 
 # Import model and load checkpoint
 module, class_name = config.model.class_name.rsplit(".", 1)
-LVSM = importlib.import_module(module).__dict__[class_name]
-model = LVSM(config).to(device)
+ILRM = importlib.import_module(module).__dict__[class_name]
+model = ILRM(config).to(device)
 model.load_ckpt(config.inference.get("ckpt_path", None))
 
 print(f"Running inference; save results to: {config.inference.out_dir}")

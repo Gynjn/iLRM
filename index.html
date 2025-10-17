@@ -60,6 +60,7 @@
         <div class="is-size-5 publication-authors" style="margin-bottom: 1rem;">
           <a href="https://gynjn.github.io/info/">Gyeongjin Kang</a><sup style="color: black;">1</sup><span style="color: black;">,</span>
           <a href="https://github.com/stnamjef">Seungtae Nam</a><sup style="color: black;">2</sup><span style="color: black;">,</span>
+          <a href="https://github.com/yang-gwon2">Seungkwon Yang</a><sup style="color: black;">2</sup><span style="color: black;">,</span>
           <a href="https://scholar.google.com/citations?user=VLzxTrAAAAAJ&hl=ko&oi=ao">Xiangyu Sun</a><sup style="color: black;">1</sup><span style="color: black;">,</span>
           <a href="https://www.samehkhamis.com">Sameh Khamis</a><sup style="color: black;">3</sup><span style="color: black;">,</span>
           <a href="https://www.cs.toronto.edu/~asamir/">Abdelrahman Mohamed</a><sup style="color: black;">3</sup><span style="color: black;">,</span>
@@ -104,7 +105,7 @@
       </div> 
       <div class="header-video">
           <video id="shiba" autoplay muted loop playsinline height="100%" draggable="false">
-            <source src="./static/video/tiger_720c.mp4" type="video/mp4">
+            <source src="./static/video/tiger.mp4" type="video/mp4">
           </video>      
           <!-- <video draggable="false" src="static/video/tiger_720_30.mp4"> -->
       </div>            
@@ -115,10 +116,13 @@
 <section class="hero teaser">
   <div class="container is-max-desktop" style="margin-top: 2rem;">
     <div class="hero-body">
-      <h1 class="subtitle has-text-centered" style="margin-top: 15px; font-size: 2rem">
+      <h1 class="subtitle has-text-centered" style="margin-top: -25px; font-size: 2rem">
+        <span style="text-align: center; font-size: 70%"><b>Large-scale, high-resolution 3D Gaussian scene reconstruction in just <span style="color: red">0.5 seconds</span></b>.</span>
+      </h1>      
+      <h1 class="subtitle has-text-centered" style="margin-top: 25px; font-size: 2rem; margin-bottom: -2px;">
         <b>iLRM Overview</b> <br>      
       </h1>
-      <img src="static/images/teaser_c.jpg" class="center">
+      <img src="static/images/teaser.webp" class="center" style="margin-bottom: -20px;">
     </div>
   </div>
 </section>
@@ -157,10 +161,6 @@
             and (3) injecting <b><i>high-resolution information at every layer</i></b> to achieve high-fidelity reconstruction.
             Experimental results on widely used datasets, such as RE10K and DL3DV, demonstrate that <b><i>iLRM</i></b> outperforms existing methods in both reconstruction quality and speed.            
           </p>
-          <p>
-            Notably, <b><i>iLRM</i></b> exhibits superior scalability, 
-            delivering significantly higher reconstruction quality under comparable computational cost by efficiently leveraging a larger number of input views.
-          </p>
         </div>
       </div>
     </div>
@@ -175,37 +175,55 @@
       <div id="results-carousel" class="carousel results-carousel" data-slides-to-show="2">
         <div class="item item-steve">
           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/flower_3c.mp4"
+            <source src="./static/video/flower.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/table_3c.mp4"
+            <source src="./static/video/kit.mp4"
                     type="video/mp4">
           </video>
         </div>        
         <div class="item item-chair-tp">
           <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/bin_3c.mp4"
+            <source src="./static/video/bin.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-shiba">
           <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/buda_3c.mp4"
+            <source src="./static/video/shop.mp4"
                     type="video/mp4">
           </video>
         </div>
         <div class="item item-fullbody">
           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/video/building_3c.mp4"
+            <source src="./static/video/build.mp4"
                     type="video/mp4">
           </video>
-        </div>        
+        </div>    
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video/wedding.mp4"
+                    type="video/mp4">
+          </video>
+        </div>   
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video/buda.mp4"
+                    type="video/mp4">
+          </video>
+        </div>   
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/video/star.mp4"
+                    type="video/mp4">
+          </video>
+        </div>                                
       </div>
       <div class="has-text-centered">
-        <p class="subtitle is-5">Results on the DL3DV dataset using 32 input images with a resolution of 540×960.</p>
+        <p class="subtitle is-5">Zero-shot inference results on the DL3DV dataset using 32 input images with a resolution of 540×960.</p>
     </div>
   </div>
 </section>
@@ -227,7 +245,7 @@
             significantly reducing the attention cost while maintaining high-quality reconstruction.
           </p>
         </div>        
-        <img src="static/images/eff_attn_c.jpg" class="center" style="margin-top: -1rem;">
+        <img src="static/images/eff_attn.webp" class="center" style="margin-top: -1rem;">
       </div>
     </div>
 
@@ -239,9 +257,9 @@
         <h3 class="title is-4">RealEstate10K</h3>
         <div class="content has-text-justified">
           <p>
-            We compare our method with the state-of-the-art methods on the RealEstate10K dataset with various numbers of input images.
+            We compare our method with the state-of-the-art methods on the RealEstate10K dataset with various numbers of input images using a single NVIDIA RTX 4090 GPU.
           </p>
-          <img src="static/images/re10k_ppt_table.jpg" class="center"> 
+          <img src="static/images/re10k_table.jpg" class="center"> 
           <img src="static/images/re10k_page.jpg" class="center">   
           <video id="replay-video"
                  controls
@@ -258,14 +276,14 @@
         <h3 class="title is-4" style="margin-top: 1rem">DL3DV low-resolution (256x448)</h3>
         <div class="content has-text-justified">
           <p>
-            We compare our method with the state-of-the-art methods on the DL3DV dataset.
+            We compare our method with the state-of-the-art methods on the DL3DV dataset using a single NVIDIA RTX 4090 GPU.
             The quantitative results are shown in the table below, performed with a 50-frame coverage following the DepthSplat protocol.
             The qualitative comparisons are presented in the accompanying video, 
             with both methods using 24 input images and evaluated over full-frame coverage.
             We also show the encoding time and memory consumption of each method.
             <b>Note that, our method generates only 1/4 Gaussians compared to the baseline method.</b>
           </p>          
-          <img src="static/images/dl3dv_lr_ppt_table.jpg" class="center">           
+          <img src="static/images/dl3dv_lr_table.jpg" class="center">           
         </div>
         <div class="content has-text-centered">
           <video id="replay-video"
@@ -274,8 +292,7 @@
                  preload
                  playsinline
                  width="96%">
-            <source src="./static/select_first/lr_cc.mp4"
-                    type="video/mp4">
+            <source src="./static/video/lr24.mp4" type="video/mp4">
           </video>
         </div>   
 
@@ -283,20 +300,21 @@
         <h3 class="title is-4">DL3DV high-resolution (512x960)</h3>
         <div class="content has-text-justified">
           <p>
-            We compare our method with the state-of-the-art methods on the DL3DV dataset.
+            We compare our method with the state-of-the-art methods on the DL3DV dataset using a single NVIDIA RTX 4090 GPU.
             In qualitative comparisons, both methods use 12 input images at a resolution of 512x960, covering a 100-frame interval.
+            Since DepthSplat encounters out-of-memory issue on the device, we evaluate its performance using a single H100 GPU.
             <b>Note that, our method generates only 1/4 Gaussians compared to the baseline method.</b>
           </p>
-          <img src="static/images/dl3dv_hr_ppt_table.jpg" class="center"> 
+          <img src="static/images/dl3dv_hr_table.jpg" class="center"> 
         </div>
         <div class="content has-text-centered">
           <div class="video-slider-container">
             <div class="video-slider-wrapper">
               <video id="video-left" autoplay muted loop playsinline>
-                <source src="static/video/ours_slider_c.mp4" type="video/mp4">
+                <source src="static/video/ours_slider.mp4" type="video/mp4">
               </video>
               <video id="video-right" autoplay muted loop playsinline>
-                <source src="static/video/ds_slider_c.mp4" type="video/mp4">
+                <source src="static/video/ds_slider.mp4" type="video/mp4">
               </video>
               <div id="slider-bar"></div>
               <div id="slider-handle"></div>    
@@ -308,7 +326,7 @@
               </button>
             </div>    
           </div>          
-        </div>        
+        </div>   
 
         <h3 class="title is-4" style="margin-top: 1rem">DL3DV high-resolution (540x960, Undistorted)</h3>
         <div class="content has-text-justified">
@@ -322,7 +340,8 @@
             Since we generate more compact 3D Gaussian representations, our finetuning converges much faster than LongLRM.
             <b>We utilized FlashAttention-3 for the zero-shot inference.</b>
           </p>         
-          <img src="static/images/undist_dl3dv_table.jpg" class="center">            
+          <img src="static/images/wide_table.jpg" class="center">  
+          <img src="static/images/graph.png" class="center">          
         </div>
       </div>
     </div>

@@ -25,11 +25,12 @@ pip install -r requirements.txt
 ## Checkpoints
 The model checkpoints are host on [HuggingFace](https://huggingface.co/Gynjn/iLRM/tree/main).
 
-| Model | PSNR  | SSIM  | LPIPS |
-| ----- | ----- | ----- | ----- |
-| [undistored_dl3dv](https://huggingface.co/Gynjn/iLRM/resolve/main/ilrm_undistort_dl3dv.pt?download=true) | 24.25 | 0.802 | 0.258 |
+| Model | View  | PSNR  | SSIM  | LPIPS |
+| ----- | ----- | ----- | ----- | ----- |
+| [undistored_dl3dv_16](https://huggingface.co/Gynjn/iLRM/resolve/main/ilrm_undistort_dl3dv_16view.pt) | 16 | 22.91 | 0.766 | 0.295 |
+| [undistored_dl3dv_32](https://huggingface.co/Gynjn/iLRM/resolve/main/ilrm_undistort_dl3dv.pt) | 32 | 24.30 | 0.803 | 0.257 |
 
-This checkpoint was trained with 32 input images. We recommend finetuning it when using a different number of input images.
+This checkpoint was trained with 16//32 input images. We recommend finetuning it when using a different number of input images.
 
 For training and evaluation, we used the DL3DV dataset after applying undistortion preprocessing with this [script](https://github.com/arthurhero/Long-LRM/blob/main/data/prosess_dl3dv.py), originally introduced in [Long-LRM](https://arthurhero.github.io/projects/llrm/index.html). 
 

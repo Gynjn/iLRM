@@ -36,9 +36,7 @@ The model checkpoints are host on [HuggingFace](https://huggingface.co/Gynjn/iLR
 
 | Model | PSNR  | SSIM  | LPIPS |
 | ----- | ----- | ----- | ----- |
-| [re10k_2view](https://huggingface.co/Gynjn/iLRM/resolve/main/re10k_2view.ckpt?download=true) | 28.49 | 0.899 | 0.113 |
-
-The evaluation results differ from the numbers reported in the paper, mainly because of the data processing precision (using float32 for camera pose calculation). We are currently revising the paper based on our internal discussions, and the updated results will be reflected in the new version. Thank you for your patience and understanding.
+| [re10k_2view](https://huggingface.co/Gynjn/iLRM/resolve/main/re10k_2view.ckpt) | 28.65 | 0.900 | 0.110 |
 
 
 ## Inference

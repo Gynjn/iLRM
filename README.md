@@ -59,3 +59,7 @@ CUDA_VISIBLE_DEVICES=0 python -m src.main +experiment=re10k dataset/view_sampler
   year={2025}
 }
 ```
+
+## ACKNOWLEDGEMENTS
+
+This work was supported by Institute of Information & Communications Technology Planning & Evaluation (IITP) grant funded by the Korea government (MSIT) (RS-2025-02653113, High-Performance Research AI Computing Infrastructure Support at the 2 PFLOPS Scale)

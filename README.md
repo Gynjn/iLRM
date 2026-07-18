@@ -52,11 +52,12 @@ CUDA_VISIBLE_DEVICES=0 python -m src.main +experiment=re10k dataset/view_sampler
 ## Citation
 
 ```
-@article{kang2025ilrm,
-  title={iLRM: An Iterative Large 3D Reconstruction Model},
-  author={Kang, Gyeongjin and Nam, Seungtae and Sun, Xiangyu and Khamis, Sameh and Mohamed, Abdelrahman and Park, Eunbyung},
-  journal={arXiv preprint arXiv:2507.23277},
-  year={2025}
+@inproceedings{kang2026ilrm,
+  title={ilrm: An iterative large 3d reconstruction model},
+  author={Kang, Gyeongjin and Nam, Seungtae and Yang, Seungkwon and Sun, Xiangyu and Khamis, Sameh and Mohamed, Abdelrahman and Park, Eunbyung},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={37332--37342},
+  year={2026}
 }
 ```
 
